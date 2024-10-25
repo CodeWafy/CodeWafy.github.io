@@ -133,46 +133,40 @@
 
     // Function to handle the command
     function handleCommand() {
-        const inputField = document.getElementById('input-command');
-        const input = inputField.value.trim();  // Get the user's input and remove spaces
-        const output = document.getElementById('shrine-output');
-        const believerMessage = document.getElementById('believer-message');  // Message about harvesting believers
-        const leftImage = document.getElementById('left-image');  // Left image to display
-        const rightImage = document.getElementById('right-image');  // Right image to display
+    const inputField = document.getElementById('input-command');
+    const input = inputField.value.trim().toLowerCase();  // Convert input to lowercase
+    const output = document.getElementById('shrine-output');
+    const believerMessage = document.getElementById('believer-message');
+    const leftImage = document.getElementById('left-image');
+    const rightImage = document.getElementById('right-image');
 
-        // Logic for input handling
-        if (input === "Desire" && !started) {
-            started = true;
-            output.innerHTML = "You have entered the Shrine. Begin your prayer.";
-            believerMessage.innerHTML = ""; // Clear any previous messages
-            leftImage.style.display = 'none'; // Hide the left image initially
-            rightImage.style.display = 'none'; // Hide the right image initially
-        } else if (input === "Pray" && started) {
-            followerCount++;
-            output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
+    if (input === "desire" && !started) {  // Check for lowercase "desire"
+        started = true;
+        output.innerHTML = "You have entered the Shrine. Begin your prayer.";
+        believerMessage.innerHTML = "";
+        leftImage.style.display = 'none';
+        rightImage.style.display = 'none';
+    } else if (input === "pray" && started) {  // Check for lowercase "pray"
+        followerCount++;
+        output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
+        believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
+        
+        leftImage.src = getRandomImage();
+        rightImage.src = getRandomImage();
+        
+        leftImage.style.display = 'block';
+        rightImage.style.display = 'block';
 
-            // Update the message below the button
-            believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
-
-            // Set random images for left and right images
-            leftImage.src = getRandomImage(); // Set random left image
-            rightImage.src = getRandomImage(); // Set random right image
-
-            // Show the images when "Pray" is inputted
-            leftImage.style.display = 'block'; // Show the left image
-            rightImage.style.display = 'block'; // Show the right image
-
-            // Debugging: log the image URLs to console
-            console.log("Left Image URL: ", leftImage.src);
-            console.log("Right Image URL: ", rightImage.src);
-        } else if (!started) {
-            output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
-        } else {
-            output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
-        }
-
-        inputField.value = '';  // Clear the input field after each command
+        console.log("Left Image URL: ", leftImage.src);
+        console.log("Right Image URL: ", rightImage.src);
+    } else if (!started) {
+        output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
+    } else {
+        output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
     }
+
+    inputField.value = '';  // Clear the input field after each command
+}
 
     // Attach event listener to the button
     document.getElementById('submit-btn').addEventListener('click', handleCommand);
