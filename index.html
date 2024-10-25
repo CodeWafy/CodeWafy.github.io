@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shrine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #shrine-output {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to the Shrine</h1>
+<p>Type "Desire" to begin your journey.</p>
+
+<input type="text" id="input-command" placeholder="Enter your command...">
+<button onclick="handleCommand()">Submit</button>
+
+<div id="shrine-output"></div>
+
+<script>
+    let started = false;
+    let followerCount = 0;
+
+    function handleCommand() {
+        const input = document.getElementById('input-command').value;
+        const output = document.getElementById('shrine-output');
+
+        if (input === "Desire" && !started) {
+            started = true;
+            output.innerHTML = "You have entered the Shrine. Begin your prayer.";
+        } else if (input === "Pray" && started) {
+            followerCount++;
+            output.innerHTML = HSR Character Kafka gains a follower +${followerCount};
+        } else if (!started) {
+            output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
+        } else {
+            output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
+        }
+
+        document.getElementById('input-command').value = ''; // Clear input
+    }
+</script>
+
+</body>
+</html>
