@@ -70,10 +70,10 @@
         }
 
         .image {
-            display: none;
-            width: 150px;
-            height: auto;
-            position: absolute;
+        display: none;
+        width: 200px; /* Set the desired width */
+        height: 300px; /* Set the desired height */
+        position: absolute;
         }
 
         #left-image {
@@ -109,8 +109,8 @@
     let followerCount = 0;
 
     function getRandomImageUrl() {
-        const baseURL = "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/images/";
-        const imageIndex = Math.floor(Math.random() * 13) + 1;
+        const baseURL = "https://github.com/CodeWafy.github.io/images/";
+        const imageIndex = Math.Floor(Math.random() * 13) + 1;
         return `${baseURL}${imageIndex}.jpg`;
     }
 
