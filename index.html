@@ -14,6 +14,18 @@
             justify-content: center;
             align-items: center;
             background-color: #f4f4f4;
+            position: relative; /* Added for absolute positioning of background images */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        .background-image {
+            position: absolute; /* Position images behind content */
+            top: 0;
+            left: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            z-index: -1; /* Send it to the back */
+            opacity: 0.2; /* Make it less visible */
         }
 
         .container {
@@ -23,7 +35,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
+            z-index: 1; /* Bring this element to the front */
         }
 
         .input-container {
@@ -70,10 +82,10 @@
         }
 
         .image {
-        display: none;
-        width: 200px; /* Set the desired width */
-        height: 300px; /* Set the desired height */
-        position: absolute;
+            display: none;
+            width: 150px;
+            height: auto;
+            position: absolute;
         }
 
         #left-image {
@@ -87,70 +99,75 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>Welcome to the Shrine</h1>
-    <p>Type "Desire" to begin your journey.</p>
+    <img id="background-image" class="background-image" src="https://github.com/CodeWafy/CodeWafy.github.io/images/background.jpg" alt="Background Image"/>
 
-    <div class="input-container">
-        <img id="left-image" class="image" src="" alt="Left Image of HSR Character Kafka" /> 
-        <input type="text" id="input-command" placeholder="Enter your command...">
-        <img id="right-image" class="image" src="" alt="Right Image of HSR Character Kafka" />
+    <div class="container">
+        <h1>Welcome to the Shrine</h1>
+        <p>Type "Desire" to begin your journey.</p>
+
+        <div class="input-container">
+            <img id="left-image" class="image" src="" alt="Left Image of HSR Character Kafka" /> 
+            <input type="text" id="input-command" placeholder="Enter your command...">
+            <img id="right-image" class="image" src="" alt="Right Image of HSR Character Kafka" />
+        </div>
+
+        <br>
+        <button id="submit-btn">Submit</button>
+
+        <div id="shrine-output"></div>
+        <div id="believer-message"></div>
     </div>
 
-    <br>
-    <button id="submit-btn">Submit</button>
+    <script>
+        let started = false;
+        let followerCount = 0;
 
-    <div id="shrine-output"></div>
-    <div id="believer-message"></div>
-</div>
-
-<script>
-    let started = false;
-    let followerCount = 0;
-
-    function getRandomImageUrl() {
-        const baseURL = "https://github.com/CodeWafy.github.io/images/";
-        const imageIndex = Math.floor(Math.random() * 13) + 1;
-        return `${baseURL}${imageIndex}.jpg`;
-    }
-
-    function handleCommand() {
-        const inputField = document.getElementById('input-command');
-        const input = inputField.value.trim().toLowerCase();
-        const output = document.getElementById('shrine-output');
-        const believerMessage = document.getElementById('believer-message');
-        const leftImage = document.getElementById('left-image');
-        const rightImage = document.getElementById('right-image');
-
-        if (input === "desire" && !started) {
-            started = true;
-            output.innerHTML = "You have entered the Shrine. Begin your prayer.";
-            believerMessage.innerHTML = "";
-            leftImage.style.display = 'none';
-            rightImage.style.display = 'none';
-        } else if (input === "pray" && started) {
-            followerCount++;
-            output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
-            believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
-
-            // Set random image URLs for left and right images
-            leftImage.src = getRandomImageUrl();
-            rightImage.src = getRandomImageUrl();
-
-            // Show the images when "Pray" is inputted
-            leftImage.style.display = 'block';
-            rightImage.style.display = 'block';
-        } else if (!started) {
-            output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
-        } else {
-            output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
+        function getRandomImageUrl() {
+            const baseURL = "https://github.com/CodeWafy.github.io/images/";
+            const imageIndex = Math.floor(Math.random() * 13) + 1;
+            return `${baseURL}${imageIndex}.jpg`;
         }
 
-        inputField.value = '';
-    }
+        function handleCommand() {
+            const inputField = document.getElementById('input-command');
+            const input = inputField.value.trim().toLowerCase();
+            const output = document.getElementById('shrine-output');
+            const believerMessage = document.getElementById('believer-message');
+            const leftImage = document.getElementById('left-image');
+            const rightImage = document.getElementById('right-image');
 
-    document.getElementById('submit-btn').addEventListener('click', handleCommand);
-</script>
+            if (input === "desire" && !started) {
+                started = true;
+                output.innerHTML = "You have entered the Shrine. Begin your prayer.";
+                believerMessage.innerHTML = "";
+                leftImage.style.display = 'none';
+                rightImage.style.display = 'none';
+            } else if (input === "pray" && started) {
+                followerCount++;
+                output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
+                believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
+
+                // Set random image URLs for left and right images
+                leftImage.src = getRandomImageUrl();
+                rightImage.src = getRandomImageUrl();
+
+                // Show the images when "Pray" is inputted
+                leftImage.style.display = 'block';
+                rightImage.style.display = 'block';
+
+                console.log("Left Image URL: ", leftImage.src);
+                console.log("Right Image URL: ", rightImage.src);
+            } else if (!started) {
+                output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
+            } else {
+                output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
+            }
+
+            inputField.value = '';
+        }
+
+        document.getElementById('submit-btn').addEventListener('click', handleCommand);
+    </script>
 
 </body>
 </html>
