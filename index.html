@@ -109,10 +109,11 @@
     let followerCount = 0;
 
     function getRandomImageUrl() {
-        const baseURL = "https://github.com/CodeWafy/CodeWafy.github.io/";
-        const imageIndex = Math.floor(Math.random() * 13) + 1;
-        return `${baseURL}${imageIndex}.jpg`;
-    }
+    const baseURL = "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/images/";
+    const imageIndex = Math.floor(Math.random() * 13) + 1;
+    return `${baseURL}${imageIndex}.jpg`;
+}
+
 
     function handleCommand() {
         const inputField = document.getElementById('input-command');
