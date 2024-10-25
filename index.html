@@ -90,12 +90,13 @@
         if (input === "Desire" && !started) {
             started = true;
             output.innerHTML = "You have entered the Shrine. Begin your prayer.";
+            believerMessage.innerHTML = ""; // Clear any previous messages
         } else if (input === "Pray" && started) {
             followerCount++;
-            output.innerHTML = HSR Character Kafka gains a follower +${followerCount};
+            output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
 
             // Update the message below the button
-            believerMessage.innerHTML = HSR Character Kafka harvests a believer (${followerCount});
+            believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
         } else if (!started) {
             output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
         } else {
