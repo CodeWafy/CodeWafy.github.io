@@ -108,21 +108,21 @@
     let started = false;  // Track if "Desire" has been entered
     let followerCount = 0;
 
-    // Updated Array of images with correct URLs
+    // Updated Array of images with the new format
     const images = [
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/1.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/2.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/3.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/4.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/5.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/6.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/7.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/8.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/9.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/10.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/11.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/12.jpg",
-        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/13.jpg"
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/1.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/2.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/3.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/4.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/5.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/6.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/7.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/8.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/9.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/10.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/11.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/12.jpg",
+        "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/refs/heads/main/13.jpg"
     ];
 
     // Function to get a random image
@@ -166,4 +166,17 @@
             console.log("Left Image URL: ", leftImage.src);
             console.log("Right Image URL: ", rightImage.src);
         } else if (!started) {
-            output.innerHTML = "You must type '
+            output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
+        } else {
+            output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
+        }
+
+        inputField.value = '';  // Clear the input field after each command
+    }
+
+    // Attach event listener to the button
+    document.getElementById('submit-btn').addEventListener('click', handleCommand);
+</script>
+
+</body>
+</html>
