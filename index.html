@@ -25,17 +25,19 @@
             width: 100%; /* Full width */
             height: 100%; /* Full height */
             z-index: -1; /* Send it to the back */
-            opacity: 0.2; /* Make it less visible */
+            opacity: 0.3; /* Make it less visible */
         }
 
         .container {
             text-align: center;
-            padding: 20px;
-            background-color: white;
+            padding: 40px; /* Increased padding for better spacing */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 1; /* Bring this element to the front */
+            max-width: 600px; /* Limit the width of the container */
+            width: 100%; /* Full width */
         }
 
         .input-container {
@@ -49,7 +51,7 @@
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
-            width: 200px;
+            width: 250px; /* Increased width */
             margin: 0 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -71,29 +73,31 @@
 
         #shrine-output {
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1.5em; /* Increased font size */
             color: darkgreen;
         }
 
         #believer-message {
             margin-top: 10px;
-            font-size: 1.1em;
+            font-size: 1.2em; /* Increased font size */
             color: darkblue;
         }
 
         .image {
             display: none;
-            width: 150px;
+            width: 200px; /* Increased width */
             height: auto;
             position: absolute;
         }
 
         #left-image {
-            left: -170px;
+            left: calc(50% - 220px); /* Centered with spacing */
+            bottom: 20px; /* Adjust position */
         }
 
         #right-image {
-            right: -170px;
+            right: calc(50% - 220px); /* Centered with spacing */
+            bottom: 20px; /* Adjust position */
         }
     </style>
 </head>
