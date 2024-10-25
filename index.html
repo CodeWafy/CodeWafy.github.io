@@ -24,11 +24,18 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        .input-container {
+            display: flex;
+            align-items: center; /* Align items vertically */
+            justify-content: center; /* Center items horizontally */
+            margin: 20px 0; /* Add margin around the input container */
+        }
+
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
             width: 200px;
-            margin-bottom: 10px;
+            margin: 0 10px; /* Add space between input and images */
             border-radius: 5px;
             border: 1px solid #ccc;
         }
@@ -58,6 +65,13 @@
             font-size: 1.1em;
             color: darkblue;
         }
+
+        .image {
+            display: none; /* Initially hidden */
+            width: 100px; /* Set a fixed width for images */
+            height: auto; /* Maintain aspect ratio */
+            margin: 0 10px; /* Add space around images */
+        }
     </style>
 </head>
 <body>
@@ -66,18 +80,46 @@
     <h1>Welcome to the Shrine</h1>
     <p>Type "Desire" to begin your journey.</p>
 
-    <!-- Input field and button to submit the command -->
-    <input type="text" id="input-command" placeholder="Enter your command...">
+    <div class="input-container">
+        <img id="left-image" class="image" src="" alt="Left Image of HSR Character Kafka" /> <!-- Change to your left image -->
+        <input type="text" id="input-command" placeholder="Enter your command...">
+        <img id="right-image" class="image" src="" alt="Right Image of HSR Character Kafka" /> <!-- Change to your right image -->
+    </div>
+
     <br>
     <button id="submit-btn">Submit</button>
 
     <div id="shrine-output"></div>
-    <div id="believer-message"></div> <!-- Message about Kafka harvesting believers -->
+    <div id="believer-message"></div> <!-- Message about harvesting believers -->
 </div>
 
 <script>
     let started = false;  // Track if "Desire" has been entered
     let followerCount = 0;
+
+    // Array of images
+    const images = [
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/1.jpg?raw=true", // Replace with your image URLs
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/2.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/3.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/4.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/5.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/6.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/7.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/8.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/9.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/10.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/11.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/12.jpg?raw=true",
+        "https://github.com/CodeWafy/CodeWafy.github.io/blob/main/13.jpg?raw=true",
+        // Add more images as needed
+    ];
+
+    // Function to get a random image
+    function getRandomImage() {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        return images[randomIndex];
+    }
 
     // Function to handle the command
     function handleCommand() {
@@ -85,18 +127,30 @@
         const input = inputField.value.trim();  // Get the user's input and remove spaces
         const output = document.getElementById('shrine-output');
         const believerMessage = document.getElementById('believer-message');  // Message about harvesting believers
+        const leftImage = document.getElementById('left-image');  // Left image to display
+        const rightImage = document.getElementById('right-image');  // Right image to display
 
         // Logic for input handling
         if (input === "Desire" && !started) {
             started = true;
             output.innerHTML = "You have entered the Shrine. Begin your prayer.";
             believerMessage.innerHTML = ""; // Clear any previous messages
+            leftImage.style.display = 'none'; // Hide the left image initially
+            rightImage.style.display = 'none'; // Hide the right image initially
         } else if (input === "Pray" && started) {
             followerCount++;
             output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
 
             // Update the message below the button
             believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
+
+            // Set random images for left and right images
+            leftImage.src = getRandomImage(); // Set random left image
+            rightImage.src = getRandomImage(); // Set random right image
+
+            // Show the images when "Pray" is inputted
+            leftImage.style.display = 'block'; // Show the left image
+            rightImage.style.display = 'block'; // Show the right image
         } else if (!started) {
             output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
         } else {
