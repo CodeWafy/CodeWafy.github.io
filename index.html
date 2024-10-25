@@ -109,11 +109,10 @@
     let followerCount = 0;
 
     function getRandomImageUrl() {
-    const baseURL = "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/images/";
-    const imageIndex = Math.floor(Math.random() * 13) + 1;
-    return `${baseURL}${imageIndex}.jpg`;
-}
-
+        const baseURL = "https://raw.githubusercontent.com/CodeWafy/CodeWafy.github.io/main/images/";
+        const imageIndex = Math.floor(Math.random() * 13) + 1;
+        return `${baseURL}${imageIndex}.jpg`;
+    }
 
     function handleCommand() {
         const inputField = document.getElementById('input-command');
@@ -141,9 +140,6 @@
             // Show the images when "Pray" is inputted
             leftImage.style.display = 'block';
             rightImage.style.display = 'block';
-
-            console.log("Left Image URL: ", leftImage.src);
-            console.log("Right Image URL: ", rightImage.src);
         } else if (!started) {
             output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
         } else {
