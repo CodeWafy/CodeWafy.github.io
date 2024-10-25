@@ -140,13 +140,13 @@
     const leftImage = document.getElementById('left-image');
     const rightImage = document.getElementById('right-image');
 
-    if (input === "desire" && !started) {  // Check for lowercase "desire"
+    if (input === "desire" || !started) {  // Check for lowercase "desire"
         started = true;
         output.innerHTML = "You have entered the Shrine. Begin your prayer.";
         believerMessage.innerHTML = "";
         leftImage.style.display = 'none';
         rightImage.style.display = 'none';
-    } else if (input === "pray" && started) {  // Check for lowercase "pray"
+    } else if (input === "pray" || started) {  // Check for lowercase "pray"
         followerCount++;
         output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
         believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
