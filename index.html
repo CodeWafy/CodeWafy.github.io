@@ -22,23 +22,23 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative; /* For positioning images */
-            overflow: hidden; /* Ensure images don't overflow */
+            position: relative;
+            overflow: hidden;
         }
 
         .input-container {
             display: flex;
-            align-items: center; /* Align items vertically */
-            justify-content: center; /* Center items horizontally */
-            margin: 20px 0; /* Add margin around the input container */
-            position: relative; /* For absolute positioning of images */
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
         }
 
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
             width: 200px;
-            margin: 0 10px; /* Add space between input and images */
+            margin: 0 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
@@ -70,18 +70,18 @@
         }
 
         .image {
-            display: none; /* Initially hidden */
-            width: 150px; /* Set a suitable width for images */
-            height: auto; /* Maintain aspect ratio */
-            position: absolute; /* Position images relative to the container */
+            display: none;
+            width: 150px;
+            height: auto;
+            position: absolute;
         }
 
         #left-image {
-            left: -170px; /* Position left image off the left side */
+            left: -170px;
         }
 
         #right-image {
-            right: -170px; /* Position right image off the right side */
+            right: -170px;
         }
     </style>
 </head>
@@ -101,74 +101,57 @@
     <button id="submit-btn">Submit</button>
 
     <div id="shrine-output"></div>
-    <div id="believer-message"></div> <!-- Message about harvesting believers -->
+    <div id="believer-message"></div>
 </div>
 
 <script>
-    let started = false;  // Track if "Desire" has been entered
+    let started = false;
     let followerCount = 0;
 
-    // Updated Array of images with the new format
-    const images = [
-        "https://github.com/CodeWafy/CodeWafy.github.io/1.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/2.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/3.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/4.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/5.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/6.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/7.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/8.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/9.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/10.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/11.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/12.jpg",
-        "https://github.com/CodeWafy/CodeWafy.github.io/13.jpg",
-    ];
-
-    // Function to get a random image
-    function getRandomImage() {
-        const randomIndex = Math.floor(Math.random() * images.length);
-        return images[randomIndex];
+    function getRandomImageUrl() {
+        const baseURL = "https://github.com/CodeWafy/CodeWafy.github.io/";
+        const imageIndex = Math.floor(Math.random() * 13) + 1;
+        return `${baseURL}${imageIndex}.jpg`;
     }
 
-    // Function to handle the command
     function handleCommand() {
-    const inputField = document.getElementById('input-command');
-    const input = inputField.value.trim().toLowerCase();  // Convert input to lowercase
-    const output = document.getElementById('shrine-output');
-    const believerMessage = document.getElementById('believer-message');
-    const leftImage = document.getElementById('left-image');
-    const rightImage = document.getElementById('right-image');
+        const inputField = document.getElementById('input-command');
+        const input = inputField.value.trim().toLowerCase();
+        const output = document.getElementById('shrine-output');
+        const believerMessage = document.getElementById('believer-message');
+        const leftImage = document.getElementById('left-image');
+        const rightImage = document.getElementById('right-image');
 
-    if (input === "desire" || !started) {  // Check for lowercase "desire"
-        started = true;
-        output.innerHTML = "You have entered the Shrine. Begin your prayer.";
-        believerMessage.innerHTML = "";
-        leftImage.style.display = 'none';
-        rightImage.style.display = 'none';
-    } else if (input === "pray" || started) {  // Check for lowercase "pray"
-        followerCount++;
-        output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
-        believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
-        
-        leftImage.src = getRandomImage();
-        rightImage.src = getRandomImage();
-        
-        leftImage.style.display = 'block';
-        rightImage.style.display = 'block';
+        if (input === "desire" && !started) {
+            started = true;
+            output.innerHTML = "You have entered the Shrine. Begin your prayer.";
+            believerMessage.innerHTML = "";
+            leftImage.style.display = 'none';
+            rightImage.style.display = 'none';
+        } else if (input === "pray" && started) {
+            followerCount++;
+            output.innerHTML = `HSR Character Kafka gains a follower +${followerCount}`;
+            believerMessage.innerHTML = `HSR Character Kafka harvests a believer (${followerCount})`;
 
-        console.log("Left Image URL: ", leftImage.src);
-        console.log("Right Image URL: ", rightImage.src);
-    } else if (!started) {
-        output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
-    } else {
-        output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
+            // Set random image URLs for left and right images
+            leftImage.src = getRandomImageUrl();
+            rightImage.src = getRandomImageUrl();
+
+            // Show the images when "Pray" is inputted
+            leftImage.style.display = 'block';
+            rightImage.style.display = 'block';
+
+            console.log("Left Image URL: ", leftImage.src);
+            console.log("Right Image URL: ", rightImage.src);
+        } else if (!started) {
+            output.innerHTML = "You must type 'Desire' to enter the Shrine first.";
+        } else {
+            output.innerHTML = "Unknown command. Type 'Desire' to start or 'Pray' to gain followers.";
+        }
+
+        inputField.value = '';
     }
 
-    inputField.value = '';  // Clear the input field after each command
-}
-
-    // Attach event listener to the button
     document.getElementById('submit-btn').addEventListener('click', handleCommand);
 </script>
 
